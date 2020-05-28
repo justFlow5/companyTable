@@ -42,15 +42,35 @@ const Row = styled.tr`
     }
   }
 `;
-const TableRow = ({ headers }) => {
+
+const TableRow = ({ headers, company }) => {
+  const {
+    id,
+    name,
+    city,
+    totalIncome,
+    averageIncome,
+    lastMonthIncome,
+  } = company;
+
+  const getCurrencyFormat = (num) =>
+    num.toLocaleString('pl-PL', {
+      style: 'currency',
+      currency: 'PLN',
+    });
+
   return (
     <Row>
-      <td data-title={headers.id}>fds</td>
-      <td data-title={headers.name}>adsfasd</td>
-      <td data-title={headers.city}>Basdadssad</td>
-      <td data-title={headers.totalIncome}>BL33</td>
-      <td data-title={headers.averageIncome}>2232</td>
-      <td data-title={headers.lastMonthIncome}>adsa</td>
+      <td data-title={headers.id}>{id}</td>
+      <td data-title={headers.name}>{name}</td>
+      <td data-title={headers.city}>{city}</td>
+      <td data-title={headers.totalIncome}>{getCurrencyFormat(totalIncome)}</td>
+      <td data-title={headers.averageIncome}>
+        {getCurrencyFormat(averageIncome)}
+      </td>
+      <td data-title={headers.lastMonthIncome}>
+        {getCurrencyFormat(lastMonthIncome)}
+      </td>
     </Row>
   );
 };

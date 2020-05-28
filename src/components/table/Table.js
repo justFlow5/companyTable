@@ -21,6 +21,18 @@ const TableComponent = styled.table`
 
   & th {
     letter-spacing: 1.5px;
+
+    &:first-child {
+      width: 10%;
+    }
+
+    &:nth-child(2) {
+      width: 30%;
+    }
+
+    &:nth-child(3) {
+      width: 20%;
+    }
   }
 
   @media (max-width: 768px) {
@@ -34,6 +46,7 @@ const TableComponent = styled.table`
       border-bottom: 1px solid #804d9c;
       display: block;
       text-align: right;
+      vertical-align: middle;
     }
 
     & td:last-child {
@@ -42,7 +55,7 @@ const TableComponent = styled.table`
   }
 `;
 
-const Table = (props) => {
+const Table = ({ companies }) => {
   const headers = {
     id: 'ID',
     name: 'Name',
@@ -56,9 +69,9 @@ const Table = (props) => {
     <TableComponent>
       <TableHead headers={headers} />
       <tbody>
-        <TableRow headers={headers} />
-        <TableRow headers={headers} />
-        <TableRow headers={headers} />
+        {companies.map((company) => (
+          <TableRow headers={headers} company={company} />
+        ))}
       </tbody>
     </TableComponent>
   );

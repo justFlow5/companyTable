@@ -26,12 +26,7 @@ const TableHead = ({ headers }) => {
   };
   return (
     <TableHeader>
-      <tr>
-        {/* {Object.keys(headers).map((dataLabel) => (
-          <TableHeaderContent>{headers[dataLabel]}</TableHeaderContent>
-        ))} */}
-        {generateHeader(headers)}
-      </tr>
+      <tr>{generateHeader(headers)}</tr>
     </TableHeader>
   );
 };

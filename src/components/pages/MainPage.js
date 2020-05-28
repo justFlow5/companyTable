@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
 import Table from '../table/Table';
 import { device } from '../../media/mediaQuery';
 import Header from '../header/Header';
+
+import {
+  sumUp,
+  getLastMonth,
+  sortASC,
+  sortDESC,
+} from '../../helperFuntions/helperFunctions';
 
 const PageWrapper = styled.section`
   position: relative;
@@ -33,18 +40,84 @@ const TableContainer = styled.div`
   width: 90%;
   height: 80%;
   overflow: auto;
-  padding: 0 10px;
-  @media ${device.tablet} {
-    width: 80%;
+  /* padding: 0 10px; */
+
+  /* scrollbar styling FIREFOX etc */
+  scrollbar-width: thin;
+  scrollbar-color: #5b005b #d7bdd7;
+
+  /* scrollbar styling CHROME */
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #d7bdd7;
+    border-radius: 4px;
+    border: 1px solid #520052;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #5b005b;
+    border-radius: 4px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #520052;
   }
 `;
 
-const MainPage = (props) => {
+const MainPage = () => {
+  const [companies, setCompanies] = useState([]);
+
+  const getCompanies = async () => {
+    let res = await axios.get('https://recruitment.hal.skygate.io/companies');
+    let sortedCompanies = sortASC(res.data, 'id');
+    return sortedCompanies;
+  };
+
+  const getCompaniesData = async (arr, initial = false) => {
+    let lastMonth = getLastMonth();
+    const companiesData = arr.map(async (company) => {
+      const res = await axios.get(
+        `https://recruitment.hal.skygate.io/incomes/${company.id}`
+      );
+      const incomesArr = res.data.incomes;
+
+      const totalIncome = sumUp(incomesArr);
+      const averageIncome = parseFloat(
+        (totalIncome / incomesArr.length).toFixed(2)
+      );
+      const lastMonthIncome = sumUp(
+        incomesArr.filter((income) => income.date.startsWith(lastMonth))
+      );
+      return {
+        ...company,
+        totalIncome,
+        averageIncome,
+        lastMonthIncome,
+      };
+    });
+    const results = await Promise.all(companiesData);
+    return results;
+  };
+
+  useEffect(() => {
+    (async () => {
+      let data = await getCompanies();
+      let completeData = await getCompaniesData(data, true);
+      setCompanies([...companies, ...completeData]);
+    })();
+  }, []);
+
   return (
     <PageWrapper>
       <Header content="Recruitment Task" />
       <TableContainer>
-        <Table />
+        <Table companies={companies} />
       </TableContainer>
     </PageWrapper>
   );
