@@ -3,16 +3,7 @@ import styled from 'styled-components';
 import { device } from '../../media/mediaQuery';
 
 const TableHeader = styled.thead`
-  /* border: none;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px; */
   display: none;
-
   @media ${device.tablet} {
     display: table-header-group;
   }
@@ -28,12 +19,18 @@ const TableHeaderContent = styled.th`
 `;
 
 const TableHead = ({ headers }) => {
+  const generateHeader = (headersObj) => {
+    return Object.keys(headersObj).map((dataLabel) => (
+      <TableHeaderContent>{headers[dataLabel]}</TableHeaderContent>
+    ));
+  };
   return (
     <TableHeader>
       <tr>
-        {Object.keys(headers).map((dataLabel) => (
+        {/* {Object.keys(headers).map((dataLabel) => (
           <TableHeaderContent>{headers[dataLabel]}</TableHeaderContent>
-        ))}
+        ))} */}
+        {generateHeader(headers)}
       </tr>
     </TableHeader>
   );

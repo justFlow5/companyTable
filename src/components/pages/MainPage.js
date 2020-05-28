@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+
 import Table from '../table/Table';
 import { device } from '../../media/mediaQuery';
 import Header from '../header/Header';
