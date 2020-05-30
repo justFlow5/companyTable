@@ -87,6 +87,7 @@ const TableContainer = styled.div`
 `;
 
 const MainPage = () => {
+  const tableElem = document.getElementById('tableContainer');
   const [companies, setCompanies] = useState([]);
   const [displayedCompanies, setDisplayedCompanies] = useState([]);
   const [currentCompanies, setCurrentCompanies] = useState([]);
@@ -216,8 +217,9 @@ const MainPage = () => {
           companies={companies}
           setDisplayedCompanies={setDisplayedCompanies}
           setCurrentPage={setCurrentPage}
+          tableElem={tableElem}
         />
-        <TableContainer>
+        <TableContainer id="tableContainer">
           <Table
             itemsPerPage={itemsPerPage}
             companies={companies}
@@ -226,6 +228,7 @@ const MainPage = () => {
             isInitData={isInitData}
             isFullData={isFullData}
             currentCompanies={currentCompanies}
+            tableElem={tableElem}
           />
         </TableContainer>
         <Footer
@@ -236,6 +239,7 @@ const MainPage = () => {
           itemsPerPage={itemsPerPage}
           firstItemIndex={firstItemIndex}
           lastItemIndex={lastItemIndex}
+          tableElem={tableElem}
         />
       </ContentContainer>
     </PageWrapper>

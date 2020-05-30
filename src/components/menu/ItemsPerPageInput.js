@@ -4,11 +4,11 @@ import { device } from '../../media/mediaQuery';
 
 const InputContainer = styled.div`
   position: relative;
-  padding-left: 20px;
+  /* padding-left: 20px; */
   display: inline-block;
 
   & > label {
-    font-size: 19px;
+    font-size: 18px;
     color: white;
     display: inline;
     padding: 0 6px;

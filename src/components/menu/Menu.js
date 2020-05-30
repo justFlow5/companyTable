@@ -14,6 +14,7 @@ const MenuBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 `;
 
 const Menu = ({
@@ -23,6 +24,7 @@ const Menu = ({
   companies,
   setDisplayedCompanies,
   setCurrentPage,
+  tableElem,
 }) => {
   return (
     <MenuBar>
@@ -35,6 +37,7 @@ const Menu = ({
         companies={companies}
         setDisplayedCompanies={setDisplayedCompanies}
         setCurrentPage={setCurrentPage}
+        tableElem={tableElem}
       />
     </MenuBar>
   );

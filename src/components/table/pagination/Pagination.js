@@ -104,6 +104,7 @@ const Pagination = ({
   itemsPerPage,
   firstItemIndex,
   lastItemIndex,
+  tableElem,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -133,7 +134,10 @@ const Pagination = ({
       <NumberItem
         className={current ? 'current' : null}
         value={num}
-        onClick={setCurrentPage}
+        onClick={(e) => {
+          setCurrentPage(e);
+          tableElem.scrollTo(0, 0);
+        }}
       >
         {num}
       </NumberItem>

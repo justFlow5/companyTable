@@ -11,7 +11,7 @@ const FilterInput = styled.input`
   border: 3px solid white;
   border-radius: 6px;
   font-size: 16px;
-  margin-right: 20px;
+  /* margin-right: 10px; */
   @media ${device.mobileL} {
     width: 115px;
   }
@@ -21,7 +21,12 @@ const FilterInput = styled.input`
   }
 `;
 
-const FilterBox = ({ companies, setDisplayedCompanies, setCurrentPage }) => {
+const FilterBox = ({
+  companies,
+  setDisplayedCompanies,
+  setCurrentPage,
+  tableElem,
+}) => {
   const [filter, setFilter] = useState('');
 
   const userInputDebounced = useDebounce(filter, 400);
@@ -38,9 +43,10 @@ const FilterBox = ({ companies, setDisplayedCompanies, setCurrentPage }) => {
     });
 
   useEffect(() => {
-    if (userInputDebounced.length >= 3) {
+    if (userInputDebounced.length >= 2) {
       setDisplayedCompanies(filterData(userInputDebounced));
       setCurrentPage(1);
+      tableElem.scrollTo(0, 0);
     } else {
       setDisplayedCompanies(companies);
     }

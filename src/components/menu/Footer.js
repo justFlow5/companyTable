@@ -27,9 +27,9 @@ const Footer = ({
   itemsCount,
   setCurrentPage,
   currentPage,
-  defaultItemsPerPage,
   firstItemIndex,
   lastItemIndex,
+  tableElem,
 }) => {
   return (
     <FooterBar>
@@ -41,6 +41,7 @@ const Footer = ({
         itemsPerPage={itemsPerPage}
         firstItemIndex={firstItemIndex}
         lastItemIndex={lastItemIndex}
+        tableElem={tableElem}
       />
     </FooterBar>
   );
