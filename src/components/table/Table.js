@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import TableHead from './TableHead';
 import TableRow from './TableRow';
 
-import { device } from '../../media/mediaQuery';
-
 const TableComponent = styled.table`
   border-collapse: collapse;
   margin: 0;
@@ -38,7 +36,6 @@ const TableComponent = styled.table`
   @media (max-width: 768px) {
     & tr {
       border: 1px solid #804d9c;
-
       border-bottom: 5px solid #660066;
       display: block;
     }

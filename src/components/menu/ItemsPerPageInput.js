@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { device } from '../../media/mediaQuery';
 
 const InputContainer = styled.div`
   position: relative;
-  /* padding-left: 20px; */
   display: inline-block;
 
   & > label {

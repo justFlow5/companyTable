@@ -11,7 +11,6 @@ const FilterInput = styled.input`
   border: 3px solid white;
   border-radius: 6px;
   font-size: 16px;
-  /* margin-right: 10px; */
   @media ${device.mobileL} {
     width: 115px;
   }
@@ -35,7 +34,7 @@ const FilterBox = ({
     companies.filter((company) => {
       let dataValues = Object.values(company);
       for (const value of dataValues) {
-        if (value.toString().toLowerCase().includes(userInput)) {
+        if (value.toString().toLowerCase().includes(userInput.toLowerCase())) {
           return company;
         }
       }
