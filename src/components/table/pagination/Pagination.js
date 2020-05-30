@@ -42,10 +42,12 @@ const NumberItem = styled.li`
   font-size: 16px;
   color: white;
   cursor: pointer;
-  /* transition: all 1s ease-in-out; */
+  transition: all 0.3s;
 
   &.tail {
     padding: 7px 5px;
+    font-weight: 700;
+    font-size: 21px;
 
     @media ${device.mobileL} {
       padding: 10px 12px;

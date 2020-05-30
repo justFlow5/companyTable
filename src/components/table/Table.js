@@ -59,7 +59,8 @@ const TableComponent = styled.table`
 
 const Table = ({
   itemsPerPage,
-  handleSortChange,
+  handleSortTypeChange,
+  sortType,
   isFullData,
   currentCompanies,
   isInitData,
@@ -89,7 +90,12 @@ const Table = ({
 
   return (
     <TableComponent>
-      <TableHead headers={headers} handleSortChange={handleSortChange} />
+      <TableHead
+        headers={headers}
+        handleSortTypeChange={handleSortTypeChange}
+        sortType={sortType}
+        isFullData={isFullData}
+      />
       <tbody>{renderRows()}</tbody>
     </TableComponent>
   );

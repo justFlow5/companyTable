@@ -18,8 +18,8 @@ const CaretContainer = styled.div`
     text-align: center;
     fill: white;
 
-    &.deactivated {
-      display: none;
+    &.active {
+      fill: #ff61ff;
     }
   }
 `;
@@ -56,7 +56,9 @@ const SortButton = styled.button`
   position: absolute;
   top: 0;
   left: 0;
+  pointer-events: ${({ isFullData }) => (isFullData ? 'auto' : 'none')};
   cursor: pointer;
+
   border: 0;
   width: 100%;
   height: 100%;
@@ -64,14 +66,18 @@ const SortButton = styled.button`
   outline: none;
 `;
 
-const TableHead = ({ headers, handleSortChange }) => {
+const TableHead = ({ headers, handleSortTypeChange, sortType, isFullData }) => {
   const generateHeader = (headersObj) => {
     return Object.keys(headersObj).map((dataLabel) => (
       <TableHeaderContent>
-        <h3>{headers[dataLabel]}</h3> <SortButton onClick={() => {}} />
+        <h3>{headers[dataLabel]}</h3>{' '}
+        <SortButton
+          onClick={() => handleSortTypeChange(dataLabel)}
+          isFullData={isFullData}
+        />
         <CaretContainer>
-          <IconSortDESC />
-          <IconSortASC />
+          <IconSortDESC className={dataLabel === sortType ? 'active' : null} />
+          <IconSortASC className={dataLabel === sortType ? 'active' : null} />
         </CaretContainer>
       </TableHeaderContent>
     ));

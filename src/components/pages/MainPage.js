@@ -13,7 +13,6 @@ import {
   sumUp,
   getLastMonth,
   sortASC,
-  sortDESC,
 } from '../../helperFuntions/helperFunctions';
 
 const PageWrapper = styled.section`
@@ -103,6 +102,9 @@ const MainPage = () => {
   const lastItemIndex = currentPage * itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
 
+  //   sort data by id by default
+  const [sortType, setSortType] = useState('id');
+
   const applyDataToCompanies = (data) => {
     setCurrentCompanies(data.slice(firstItemIndex, lastItemIndex));
     setDisplayedCompanies([...displayedCompanies, ...data]);
@@ -150,7 +152,16 @@ const MainPage = () => {
     return await Promise.all(companiesData);
   };
 
-  const handleSortChange = (sortType) => {};
+  const handleSortTypeChange = (userSortType) => {
+    if (userSortType === sortType) {
+      setDisplayedCompanies([...displayedCompanies].reverse());
+    } else {
+      const sortedCompanies = [...sortASC(displayedCompanies, userSortType)];
+      setDisplayedCompanies(sortedCompanies);
+      setSortType(userSortType);
+    }
+    setCurrentPage(1);
+  };
 
   useEffect(() => {
     //   fetch initial data on page load
@@ -206,7 +217,8 @@ const MainPage = () => {
           <Table
             itemsPerPage={itemsPerPage}
             companies={companies}
-            handleSortChange={handleSortChange}
+            handleSortTypeChange={handleSortTypeChange}
+            sortType={sortType}
             isInitData={isInitData}
             isFullData={isFullData}
             currentCompanies={currentCompanies}

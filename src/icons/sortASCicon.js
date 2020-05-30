@@ -1,12 +1,13 @@
 import React from 'react';
 
-const SortDesc = () => {
+const SortDesc = ({ className }) => {
   return (
     <svg
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 292.362 292.362"
+      className={className}
     >
       <g>
         <path
