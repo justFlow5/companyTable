@@ -27,7 +27,7 @@ const TableComponent = styled.table`
     }
 
     &:nth-child(2) {
-      width: 30%;
+      width: 25%;
     }
 
     &:nth-child(3) {
@@ -38,7 +38,8 @@ const TableComponent = styled.table`
   @media (max-width: 768px) {
     & tr {
       border: 1px solid #804d9c;
-      border-bottom: 3px solid #804d9c;
+
+      border-bottom: 5px solid #660066;
       display: block;
     }
 
@@ -46,7 +47,8 @@ const TableComponent = styled.table`
       border-bottom: 1px solid #804d9c;
       display: block;
       text-align: right;
-      vertical-align: middle;
+
+      padding-left: 45%;
     }
 
     & td:last-child {
@@ -55,7 +57,13 @@ const TableComponent = styled.table`
   }
 `;
 
-const Table = ({ companies }) => {
+const Table = ({
+  itemsPerPage,
+  handleSortChange,
+  isFullData,
+  currentCompanies,
+  isInitData,
+}) => {
   const headers = {
     id: 'ID',
     name: 'Name',
@@ -65,14 +73,24 @@ const Table = ({ companies }) => {
     lastMonthIncome: 'Last Month Income',
   };
 
+  const renderRows = () => {
+    if (isInitData || isFullData) {
+      return currentCompanies.map((company, key) => (
+        <TableRow key={key} headers={headers} company={company} empty={false} />
+      ));
+    } else {
+      let rows = [];
+      for (let i = 0; i <= itemsPerPage; i++) {
+        rows.push(<TableRow key={i} headers={headers} empty={true} />);
+      }
+      return rows;
+    }
+  };
+
   return (
     <TableComponent>
-      <TableHead headers={headers} />
-      <tbody>
-        {companies.map((company) => (
-          <TableRow headers={headers} company={company} />
-        ))}
-      </tbody>
+      <TableHead headers={headers} handleSortChange={handleSortChange} />
+      <tbody>{renderRows()}</tbody>
     </TableComponent>
   );
 };

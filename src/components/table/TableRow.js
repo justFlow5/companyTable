@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { device } from '../../media/mediaQuery';
 
 const Row = styled.tr`
-  margin-bottom: 10px;
+  @media ${device.tablet} {
+    margin-bottom: 10px;
+  }
 
   &:nth-child(even) {
     background-color: #eaeaea;
@@ -21,6 +23,7 @@ const Row = styled.tr`
     padding: 10px 15px;
     font-size: 21px;
     position: relative;
+    padding-left: 45%;
 
     &::before {
       content: attr(data-title);
@@ -43,33 +46,26 @@ const Row = styled.tr`
   }
 `;
 
-const TableRow = ({ headers, company }) => {
-  const {
-    id,
-    name,
-    city,
-    totalIncome,
-    averageIncome,
-    lastMonthIncome,
-  } = company;
-
+const TableRow = ({ headers, company, empty }) => {
   const getCurrencyFormat = (num) =>
-    num.toLocaleString('pl-PL', {
+    num.toLocaleString('en-GB', {
       style: 'currency',
-      currency: 'PLN',
+      currency: 'EUR',
     });
 
   return (
     <Row>
-      <td data-title={headers.id}>{id}</td>
-      <td data-title={headers.name}>{name}</td>
-      <td data-title={headers.city}>{city}</td>
-      <td data-title={headers.totalIncome}>{getCurrencyFormat(totalIncome)}</td>
+      <td data-title={headers.id}>{empty ? '\u00A0' : company.id}</td>
+      <td data-title={headers.name}>{empty ? '\u00A0' : company.name}</td>
+      <td data-title={headers.city}>{empty ? '\u00A0' : company.city}</td>
+      <td data-title={headers.totalIncome}>
+        {getCurrencyFormat(empty ? '\u00A0' : company.totalIncome)}
+      </td>
       <td data-title={headers.averageIncome}>
-        {getCurrencyFormat(averageIncome)}
+        {getCurrencyFormat(empty ? '\u00A0' : company.averageIncome)}
       </td>
       <td data-title={headers.lastMonthIncome}>
-        {getCurrencyFormat(lastMonthIncome)}
+        {getCurrencyFormat(empty ? '\u00A0' : company.lastMonthIncome)}
       </td>
     </Row>
   );
