@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { device } from '../../media/mediaQuery';
 
+import useDebounce from '../../hooks/useDebounce';
+
 const FilterInput = styled.input`
   width: 80px;
   height: 10px;
@@ -22,6 +24,8 @@ const FilterInput = styled.input`
 const FilterBox = ({ companies, setDisplayedCompanies, setCurrentPage }) => {
   const [filter, setFilter] = useState('');
 
+  const userInputDebounced = useDebounce(filter, 400);
+
   const filterData = (userInput) =>
     companies.filter((company) => {
       let dataValues = Object.values(company);
@@ -34,13 +38,13 @@ const FilterBox = ({ companies, setDisplayedCompanies, setCurrentPage }) => {
     });
 
   useEffect(() => {
-    if (filter.length >= 3) {
-      setDisplayedCompanies(filterData(filter));
+    if (userInputDebounced.length >= 3) {
+      setDisplayedCompanies(filterData(userInputDebounced));
       setCurrentPage(1);
     } else {
       setDisplayedCompanies(companies);
     }
-  }, [filter]);
+  }, [userInputDebounced]);
 
   return (
     <FilterInput

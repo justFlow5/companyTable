@@ -17,6 +17,7 @@ const CaretContainer = styled.div`
     display: block;
     text-align: center;
     fill: white;
+    cursor: pointer;
 
     &.active {
       fill: #ff61ff;
