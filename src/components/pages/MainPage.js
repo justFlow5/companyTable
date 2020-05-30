@@ -50,6 +50,7 @@ const ContentContainer = styled.div`
 
   @media ${device.tablet} {
     height: 95%;
+    justify-content: start;
   }
 `;
 
@@ -212,6 +213,9 @@ const MainPage = () => {
           handleNumOfItems={handleNumOfItems}
           isFullData={isFullData}
           itemsPerPage={itemsPerPage}
+          companies={companies}
+          setDisplayedCompanies={setDisplayedCompanies}
+          setCurrentPage={setCurrentPage}
         />
         <TableContainer>
           <Table

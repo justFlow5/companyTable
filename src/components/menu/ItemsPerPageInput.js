@@ -6,10 +6,6 @@ const InputContainer = styled.div`
   position: relative;
   padding-left: 20px;
   display: inline-block;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
 
   & > label {
     font-size: 19px;

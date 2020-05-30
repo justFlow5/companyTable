@@ -22,7 +22,7 @@ const PaginationInfo = styled.h3`
   }
 `;
 
-const ListOfNumbers = styled.li`
+const ListOfNumbers = styled.ul`
   display: flex;
   flex-wrap: wrap;
   list-style: none;
@@ -34,6 +34,7 @@ const ListOfNumbers = styled.li`
 const NumberItem = styled.li`
   background: #a01ca0;
   margin: 1px;
+
   border-radius: 4px;
   text-align: center;
   transform: scale(1);
@@ -42,7 +43,15 @@ const NumberItem = styled.li`
   font-size: 16px;
   color: white;
   cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: all 0.3s;
+
+  @media ${device.mobileL} {
+    font-size: 18px;
+  }
 
   &.tail {
     padding: 7px 5px;
@@ -60,6 +69,9 @@ const NumberItem = styled.li`
 
   @media ${device.tablet} {
     padding: 10px;
+    padding: 0;
+    width: 30px;
+    height: 35px;
   }
 
   &:hover {

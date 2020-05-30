@@ -17,10 +17,9 @@ export const getLastMonth = () => {
 }
 
 
-export function sortASC(arr, key) {
-    return arr.sort((a, b) => (a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0));
-}
+export const sortASC = (arr, dataType) =>
+    arr.sort((a, b) => (a[dataType] < b[dataType] ? -1 : a[dataType] > b[dataType] ? 1 : 0));
 
-export function sortDESC(arr, key) {
-    return arr.sort((a, b) => (a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0));
-}
+
+export const sortDESC = (arr, dataType) =>
+    arr.sort((a, b) => (a[dataType] > b[dataType] ? -1 : a[dataType] < b[dataType] ? 1 : 0));
