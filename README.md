@@ -1,68 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Company Table
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+The website's purpose is to fetch data of companies using a given API and presents its results in the form of a table.
 
-### `npm start`
+## Preview
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Website is hosted on Netlify and it's available for [preview].
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone this repository and install dependencies inside project directory.
 
-### `npm run build`
+```
+git clone git@github.com:justFlow5/companyTable.git
+cd company-table
+npm install
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Usage
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+To run this project in development mode use:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+npm start
+```
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Pages
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### MainPage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The main page that stores most of the application's logic and renders all components.
+When the user enters the page it makes an initial request to the server to display the first page of results.
+After that app makes requests to get the rest of the results. It improves UX because in order to display every result app has to make 300 requests and do math operations to calculate incomes of companies which takes a few seconds, but when the initial request is made first results are displayed to the user almost immediately.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+## Main components
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Table
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Render the whole table.
 
-### Code Splitting
+### TableHead
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Used to display header in the table. When clicked one time it sorts the table in ascending order. After clicking the second time it sorts the table in descending order.
 
-### Analyzing the Bundle Size
+### TableRow
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Render table row. Before initial fetch is made, this component renders empty row. When the fetch is complete, the component renders filled table row.
 
-### Making a Progressive Web App
+### Pagination
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Generate page numbers based on number of results.
 
-### Advanced Configuration
+### FilterBox
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Filter results based on a user input.
 
-### Deployment
+### ItemsPerPageInput
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Display buttons that allow you to change how many results are displayed per page.
 
-### `npm run build` fails to minify
+### Header
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The main header that plays a role of table caption.
+
+---
+
+Created with [Create React App](https://github.com/facebook/create-react-app).
+Styled with [Styled-Components](https://github.com/styled-components/styled-components).
+
+[preview]: https://cocky-joliot-640ef5.netlify.app
